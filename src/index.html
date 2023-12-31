@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+    <meta charset="UTF-8" />
+    <title>cards</title>
+    <!-- Bulma Version 0.9.4-->
+    <link rel="stylesheet" href="css/bulma.min.css" />
+    <link rel="stylesheet" href="css/kanban.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <script
+      src="https://kit.fontawesome.com/7dc3015a44.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+
+  <body>
+    <nav class="navbar has-shadow">
+      <div class="container">
+        <div class="navbar-brand">
+          <a class="navbar-item animate__animated animate__tada"
+            ><img
+              src="../Img/fechadura-da-porta.png"
+              alt="GDS: Seu gerenciador de senhas"
+          /></a>
+          <div class="navbar-burger burger" data-target="navMenu">
+            <span></span><span></span><span></span>
+          </div>
+        </div>
+        <div class="navbar-menu" id="navMenu">
+          <div class="navbar-end">
+            <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link">Account</a>
+              <div class="navbar-dropdown">
+                <a class="navbar-item">Dashboard</a
+                ><a class="navbar-item">Profile</a
+                ><a class="navbar-item">Settings</a>
+                <hr class="navbar-divider" />
+                <div class="navbar-item">Logout</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <section class="hero is-black">
+      <div class="hero-body">
+        <div class="container">
+          <div class="card">
+            <div class="card-content">
+              <div class="content">
+                <div class="control has-icons-left has-icons-right">
+                  <input
+                    oninput="search()"
+                    id="searchInput"
+                    class="input is-large"
+                    type="search"
+                  />
+                  <span class="icon is-medium is-left">
+                    <i class="fa fa-search"></i>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div class="box cta">
+      <div class="columns is-mobile is-centered">
+        <div class="field is-grouped is-grouped-multiline">
+          <div class="animate__animated animate__fadeInDown control">
+            <span class="tag is-link is-large">Nova</span>
+          </div>
+          <div class="animate__animated animate__fadeInDown control">
+            <span class="tag is-success is-large">Sucesso</span>
+          </div>
+          <div class="animate__animated animate__fadeInDown control">
+            <span class="tag is-black is-large">Black</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <section class="container">
+      <div class="level-item">
+        <div
+          class="columns is-multiline is-centered cards-container"
+          id="sectioncontainer"
+        >
+          <div id="cardbox1" class="cardbox">
+            <div class="column is-narrow">
+              <article
+                class="message is-purple animate__animated animate__backInRight"
+              >
+                <div class="message-header">
+                  <label>conta 1</label>
+                  <button class="delete" aria-label="delete"></button>
+                </div>
+                <div class="message-body">
+                  <div class="board-item">
+                    <div class="board-item-content">
+                      <span>kala@lalalalal</span>
+                    </div>
+                  </div>
+                  <div class="board-item">
+                    <input
+                      class="board-item-content password"
+                      id="password"
+                      type="password"
+                      readonly
+                    />
+                  </div>
+                  <div class="board-item">
+                    <div class="board-item-content">
+                      <span>campo obs obs obs obs obs</span>
+                    </div>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </div>
+          <div id="cardbox2" class="cardbox">
+            <div class="column is-narrow">
+              <article
+                class="message is-purple animate__animated animate__backInRight"
+              >
+                <div class="message-header">
+                  <label>Conta 2</label>
+                  <button class="delete" aria-label="delete"></button>
+                </div>
+                <div class="message-body">
+                  <div class="board-item">
+                    <div class="board-item-content">
+                      <span>lalalala@kala</span>
+                    </div>
+                  </div>
+                  <div class="board-item">
+                    <input
+                      class="board-item-content password"
+                      id="password"
+                      type="password"
+                      readonly
+                    />
+                  </div>
+                  <div class="board-item">
+                    <div class="board-item-content">
+                      <span>obs obs obs</span>
+                    </div>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div class="columns is-mobile is-centered">
+      <div class="column is-half is-narrow"></div>
+    </div>
+    <script src="js/bulma.js"></script>
+  </body>
+</html>
+
+<script>
+  function search() {
+    var divs;
+    let input = document.getElementById("searchInput").value.toUpperCase();
+    divs = document.getElementsByClassName("cardbox");
+
+    for (var i = 0; i < divs.length; i++) {
+      let labeltext = divs[i]
+        .getElementsByTagName("label")[0]
+        .innerText.toUpperCase();
+      let divelement = document.getElementById(divs[i].id);
+      if (input == "") {
+        animateCSS(divelement, "animate__backInRight");
+      } else if (labeltext.includes(input)) {
+        animateCSS(divelement, "animate__backInRight");
+      } else {
+        animateCSS(divelement, "animate__backOutLeft").then((s) => {
+          if (input != "") divelement.style.display = "none";
+        });
+      }
+    }
+  }
+
+  const animateCSS = (element, animation, prefix = "animate__") =>
+    // We create a Promise and return it
+    new Promise((resolve, reject) => {
+      let animationName = animation;
+      const node = element;
+      node.classList.remove(`${prefix}animated`, "animate__backInRight");
+      node.classList.remove(`${prefix}animated`, "animate__backOutLeft");
+      node.classList.add(`${prefix}animated`, animationName);
+      if (animationName.toUpperCase().includes("IN")) {
+        node.style.display = "flex";
+      }
+
+      // When the animation ends, we clean the classes and resolve the Promise
+      function handleAnimationEnd(event) {
+        event.stopImmediatePropagation();
+        node.classList.remove(`${prefix}animated`, animationName);
+        resolve(animationName);
+      }
+
+      node.addEventListener("animationend", handleAnimationEnd, { once: true });
+    });
+</script>
