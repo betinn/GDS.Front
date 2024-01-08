@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
   <head>
     <link
       type="text/css"
@@ -18,7 +18,7 @@
     ></script>
   </head>
 
-  <body>
+  <body onload="fasterAnimation(); checkCookiesForLogin()">
     <nav class="navbar has-shadow">
       <div class="container">
         <div class="navbar-brand">
@@ -55,7 +55,7 @@
               <div class="content">
                 <div class="control has-icons-left has-icons-right">
                   <input
-                    oninput="search()"
+                    onkeyup="search()"
                     id="searchInput"
                     class="input is-large"
                     type="search"
@@ -166,6 +166,33 @@
 </html>
 
 <script>
+
+  function checkCookiesForLogin(){
+    let token = getCookie("gdstoken");
+  if (token == "") {
+    window.location.replace("LoginPage.html");
+  } 
+  }
+function getCookie(cname) {
+  let name = cname + "=";
+  let decodedCookie = decodeURIComponent(document.cookie);
+  let ca = decodedCookie.split(';');
+  for(let i = 0; i <ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+
+  function fasterAnimation(){
+    document.documentElement.style.setProperty('--animate-duration', '.25s');
+  }
+
   function search() {
     var divs;
     let input = document.getElementById("searchInput").value.toUpperCase();
