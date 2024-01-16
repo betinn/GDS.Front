@@ -555,7 +555,9 @@ table th {
         transform: rotate(359deg)
     }
 }
-
+.cardbox {
+    max-width: 30%;
+}
 .box {
     border-radius: 30px;
     box-shadow: 0 .5em 1em -.125em rgba(10, 10, 10, .1), 0 0 0 1px rgba(10, 10, 10, .02);
@@ -5461,7 +5463,7 @@ print {
     justify-content: center
 }
 .isloginPage{
-    margin-top: 25%;
+    margin-top: 15%;
 }
 .level-item .subtitle,
 .level-item .title {
